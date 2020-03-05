@@ -15,6 +15,7 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
+    <!--   TODO: replace this with team.html Replace the current css with TPL's-->
     {% compress css %}
     <link type="text/x-scss" href="{% static 'blog/scss/blog.scss' %}" rel="stylesheet" media="screen">
     {% endcompress %}
@@ -33,6 +34,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
+          Hi, I'm here - try to change out this and see what happens
             {% main_menu template="menu/main_menu.html" %}
         </div>
       </div>
@@ -44,7 +46,7 @@
       <div class="row">
 
             {% block maincontent %}
-
+            Hi, is this main body
                 <div class="col-md-8">
                     {% block content %}
 
