@@ -8,5 +8,11 @@ from wagtail.images.blocks import ImageChooserBlock
 
 
 class RowBlock(blocks.StructBlock):
-    paragraph = blocks.RichTextBlock()
-    image = ImageChooserBlock()
+    title = blocks.CharBlock()
+    datetime_google = blocks.CharBlock()
+    datetime_reader = blocks.CharBlock()
+    location_up = blocks.CharBlock()
+    location_down = blocks.CharBlock()
+    eventbrite = blocks.URLBlock()
+    googlemap = blocks.URLBlock()
+    description = blocks.RichTextBlock()
