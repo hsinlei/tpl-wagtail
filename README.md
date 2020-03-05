@@ -35,8 +35,3 @@ pip install -r requirements.txt
 ```
 
 If you have any problem with your Wagtail project you can [contact me](https://www.accordbox.com/contact/)
-
-## ScreenShot
-
-![](https://blog.michaelyin.info/upload/images/wagtail-demo-live-screenshot-bootstrap4.original.jpg)
-
