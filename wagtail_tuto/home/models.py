@@ -26,7 +26,7 @@ class CopyWritingSettings(BaseSetting):
     hero_cta_url = models.URLField(
         max_length=255, help_text='Hero CTA Text')
 
-    testimonial = StreamField([
+    event = StreamField([
         ('row', RowBlock()),
     ], null=True, blank=True)
 
@@ -41,5 +41,5 @@ class CopyWritingSettings(BaseSetting):
             heading="Hero",
             classname="collapsible"
         ),
-        StreamFieldPanel('testimonial'),
+        StreamFieldPanel('event'),
     ]

@@ -104,34 +104,37 @@ class BlogPage(RoutablePageMixin, Page):
 
 
 class PostPage(Page):
-    body = MarkdownField()
-    date = models.DateTimeField(verbose_name="Post date", default=datetime.datetime.today)
-    excerpt = MarkdownField(
-        verbose_name='excerpt', blank=True,
-    )
-
-    header_image = models.ForeignKey(
+    name = models.CharField(null=True, max_length=255)
+    permalink = models.URLField("Full Link", blank=True)
+    linkedin_link = models.CharField(null=True, max_length=255)
+    position = models.CharField(null=True, max_length=255)
+    personal_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True, blank=True,
         on_delete=models.SET_NULL,
         related_name='+',
     )
-
+    full_bio = MarkdownField(
+        verbose_name='Your personal bio', blank=True,
+    )
+    excerpt = MarkdownField(
+        verbose_name='excerpt', blank=True,
+    )
     categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
     tags = ClusterTaggableManager(through='blog.BlogPageTag', blank=True)
 
     content_panels = Page.content_panels + [
-        ImageChooserPanel('header_image'),
-        MarkdownPanel("body"),
-        MarkdownPanel("excerpt"),
-        FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
-        FieldPanel('tags'),
-    ]
 
-    settings_panels = Page.settings_panels + [
-        FieldPanel('date'),
+        FieldPanel('name'),
+        FieldPanel('position'),
+        FieldPanel('permalink'),
+        FieldPanel('linkedin_link'),
+        ImageChooserPanel('personal_image'),
+        MarkdownPanel("full_bio"),
+        # MarkdownPanel("excerpt"),
+        # FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
+        # FieldPanel('tags'),
     ]
-
     @property
     def blog_page(self):
         return self.get_parent().specific

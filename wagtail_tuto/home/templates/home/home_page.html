@@ -1,4 +1,5 @@
 {% load static menu_tags compress wagtailcore_tags wagtailimages_tags %}
+
 <!DOCTYPE html>
 <html class="no-js" lang="en-US">
 
@@ -200,39 +201,32 @@
                     <h2 class="h1">Events</h2>
                 </div>
                 <div class="col-md-9 col-lg-8">
-
+                {% for row in social_media_setting.event %}
                     <div class="events__description">
+
                         <h3 class="events__title"><a
-                                href="https://www.eventbrite.com/e/why-is-our-health-insurance-incomplete-what-can-we-do-about-it-tickets-94225144945"
-                                class="events__link" target="_blank" rel="nofollow">Why Is Our Health Insurance
-                            Incomplete? What Can We Do About It?</a></h3>
+                                href={{row.value.eventbrite}}
+                                class="events__link" target="_blank" rel="nofollow">{{row.value.title}}</a></h3>
                         <p class="h5 events__date">
-                            <time datetime="2020-02-20 00:00:00 -0500">Thursday, February 20, 2020, 3:00pm - 4:00pm
+                            <time datetime={{row.value.datetime_google}}>{{row.value.datetime_reader}}
                             </time>
                         </p>
-                        <p class="h5 events__location">Brown University School of Public Health<br>121 South Main
-                            Street, Room 245</p>
+                        <p class="h5 events__location">
+                            {{row.value.location_up}}<br>{{row.value.location_down}}</p>
                         <p class="h5 alt-bold events__map-link">
-                            <a href="https://www.google.com/maps/place/Brown+University+School+of+Public+Health/@41.8241918,-71.4069118,15z/data=!4m2!3m1!1s0x0:0x80d4b9ed0ee86d85?sa=X&ved=2ahUKEwilv82ArMrnAhUthOAKHZKFAh0Q_BIwCnoECBkQCA"
+                            <a href={{row.value.googlemap}}
                                target="_blank" rel="nofollow">
                                 <span class="events__map__text">Map &rarr;</span>
                             </a>
                         </p>
                         <p class="h5 alt-bold events__register-link">
-                            <a href="https://www.eventbrite.com/e/why-is-our-health-insurance-incomplete-what-can-we-do-about-it-tickets-94225144945"
+                            <a href={{row.value.eventbrite}}
                                target="_blank" class=events__register__link"" rel="nofollow">Register on Eventbrite
                                 &rarr;</a>
                         </p>
-                        Join us for a conversation with Chris Robertson on how to address the ways that incomplete
-                        health insurance keeps people from valuable care, causes widespread anxiety, and drives many
-                        patients and their families into bankruptcy and foreclosure. Robertson is Professor of Law at
-                        the University of Arizona and author of the new book, <a
-                            href="https://www.hup.harvard.edu/catalog.php?isbn=9780674972162">Exposed: Why Our Health
-                        Insurance Is Incomplete and What Can Be Done about It</a>.
-
-
+                        {{ row.value.description|richtext }}
                     </div>
-
+                {% endfor %}
                 </div>
             </div>
         </article>
@@ -319,7 +313,29 @@
     </section>
 
 
-    <section id="anchor-jobs" class="u__vspacing s__light-splatter pb-0 target-cynosure">
+{% comment %} People {% endcomment %}
+<!--    TODO: update the path here-->
+      <section id="anchor-team" class="u__vspacing s__light">
+        <article class="u__container">
+          <div class="u__spacing">
+            <h2 class="h1 text-center">Our Team</h2>
+          </div>
+          <div class="container u__spacing team py-0">
+            <div class="row justify-content-center">
+              {% for teammate in site.team %}
+                {% include "team-teaser.html" %}
+              {% endfor %}
+            </div>
+            <div class="text-center">
+              <a href="" class="btn btn-lg btn-primary">View All</a>
+            </div>
+          </div>
+        </article>
+      </section>
+
+
+
+      <section id="anchor-jobs" class="u__vspacing s__light-splatter pb-0 target-cynosure">
         <article class="u__container u__spacing jobs">
             <div class="row">
                 <div class="col-md-3 col-lg-4">

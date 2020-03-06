@@ -1,16 +1,94 @@
-
-{% extends "blog/base.html" %}
-
 {% load static wagtailcore_tags wagtailimages_tags blogapp_tags el_pagination_tags wagtailmd %}
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
 
+<head>
+    <meta charset="utf-8">
+    <link rel="dns-prefetch" href="//use.typekit.net">
+    <link rel="dns-prefetch" href="//cloud.typography.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//code.jquery.com">
+    <link rel="dns-prefetch" href="//stackpath.bootstrapcdn.com">
+    <link rel="preconnect" href="//brown.us20.list-manage.com">
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="wkcAVWy8ClxzqSm5y4O1zgeSVSi3QBaFD69VQP5YNvQ">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="The Policy Lab">
+    <meta property="og:url" content="http://localhost:4060/">
+    <meta property="og:image" content="{% static 'img/share-image.jpg' %}">
+    <meta property="og:site_name" content="The Policy Lab">
+    <meta property="og:description"
+          content="We're a new lab at the center of Rhode Island’s infrastructure for evidence-based policymaking. Let's learn together.">
+
+    <title>The Policy Lab</title>
+    <meta name="description"
+          content="We're a new lab at the center of Rhode Island’s infrastructure for evidence-based policymaking. Let's learn together.">
+
+    <link rel="stylesheet" type="text/css" href="https://use.typekit.net/wag1nll.css">
+    <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7022116/7515612/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134641342-1"></script>
+    <script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-134641342-1');
+
+    </script>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon.png' %}">
+
+
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'favicons/safari-pinned-tab.svg' %}" color="#007ea8">
+    <meta name="msapplication-TileColor" content="#007ea8">
+    <meta name="theme-color" content="#007ea8">
+
+</head>
+<section class="layout__main team s__light-splatter s__lil-splatter">
+  <div class="nav__spacer"></div>
+
+  <div class="u__container">
+    <div class="u__spacing">
+      <h2 class="h1 text-center">Our Team</h2>
+    </div>
+    <div class="container u__spacing team py-0">
+      <div class="row justify-content-center">
+        {% for teammate in site.team %}
+          {% if page.title != teammate.title %}
+            {% include "home/templates/home/team-teaser.html" %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <aside class="u__vspacing s__light">
+    <div class="u__container u__spacing connect">
+      <div class="row">
+        <div class="col-md-3 col-lg-4">
+          <h2 class="h1">Get Updates</h2>
+        </div>
+        <div class="col-md-9 col-lg-8">
+          <p class="lead">Sign up to get updates on projects, events, and new episodes of our podcast, <a href="https://thirtythousandleagues.com/">30,000 Leagues</a></p>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+</section>
 {% block content %}
 
-    {% if search_term %}
-      <header class="page-header">
-          <h1 class="page-title">Search Results for <span>{{ search_type }}: {{ search_term }}</span></h1>
-      </header>
-    {% endif %}
-
+Abooo
     {% paginate 5 posts %}
     {% for post in posts %}
       <!-- Blog Post -->
@@ -50,3 +128,4 @@
     </ul>
 
 {% endblock %}
+</html>
