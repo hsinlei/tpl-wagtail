@@ -6,8 +6,6 @@
 * Django 2.1.5
 * Wagtail 2.8
 
-**The database and media files would be reset after a while, so do not be surprised if your article is gone.**
-
 ## Run it in local env
 
 ```bash
