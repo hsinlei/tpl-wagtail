@@ -61,10 +61,21 @@
     </div>
     <div class="container u__spacing team py-0">
       <div class="row justify-content-center">
-        {% for teammate in site.team %}
-          {% if page.title != teammate.title %}
-            {% include "home/templates/home/team-teaser.html" %}
-          {% endif %}
+        {% paginate 5 posts %}
+        {% for teammate in posts %}
+          <div class="team__member col-6 col-md-4 col-lg-3 u__vspacing-b">
+              <a href="" class="team__link ">
+                <div class="team__photo ">
+
+                    <img src="{% static 'img/team/'|add:teammate.image_filename %}"
+                         class="img--rwd" alt="" aria-hidden="true"/>
+                </div>
+                <p>
+                  <span class="team__name h5">{{ teammate.name }}</span>{% comment %}
+                  <span class="team__position">{{ teammate.position }}</span>{% endcomment %}
+                </p>
+              </a>
+            </div>
         {% endfor %}
       </div>
     </div>
@@ -78,54 +89,9 @@
         </div>
         <div class="col-md-9 col-lg-8">
           <p class="lead">Sign up to get updates on projects, events, and new episodes of our podcast, <a href="https://thirtythousandleagues.com/">30,000 Leagues</a></p>
-
-
-
         </div>
       </div>
     </div>
   </aside>
 </section>
-{% block content %}
-
-Abooo
-    {% paginate 5 posts %}
-    {% for post in posts %}
-      <!-- Blog Post -->
-      <div class="card mb-4">
-
-        {% if post.header_image %}
-            {% image post.header_image original as header_image %}
-            <a href="{% post_date_url post blog_page %}">
-              <img src="{{ header_image.url }}" class="card-img-top" ></img>
-            </a>
-        {% endif %}
-
-        <div class="card-body">
-          <h2 class="card-title">
-            <a href="{% post_date_url post blog_page %}">{{ post.title }}</a>
-          </h2>
-          <p class="card-text">
-            {% if post.excerpt %}
-                {{ post.excerpt|markdown|safe }}
-            {% else %}
-                {{ post.body|markdown|safe|truncatewords_html:70 }}
-            {% endif %}
-          </p>
-          <a href="{% post_date_url post blog_page %}" class="btn btn-primary">Read More &rarr;</a>
-
-        </div>
-        <div class="card-footer text-muted">
-            Posted on {{ post.date }}
-        </div>
-      </div>
-
-    {% endfor %}
-
-    <!-- Pagination -->
-    <ul class="pagination justify-content-center mb-4">
-      {% show_pages %}
-    </ul>
-
-{% endblock %}
 </html>
