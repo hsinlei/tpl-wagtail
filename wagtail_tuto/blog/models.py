@@ -48,7 +48,7 @@ class BlogPage(RoutablePageMixin, Page):
         return context
 
     def get_posts(self):
-        return PostPage.objects.descendant_of(self).live().order_by('-date')
+        return PostPage.objects.descendant_of(self).live()
 
     @route(r'^(\d{4})/$')
     @route(r'^(\d{4})/(\d{2})/$')
@@ -105,36 +105,35 @@ class BlogPage(RoutablePageMixin, Page):
 
 class PostPage(Page):
     name = models.CharField(null=True, max_length=255)
+    date = models.DateTimeField(verbose_name="Post date", default=datetime.datetime.today)
     permalink = models.URLField("Full Link", blank=True)
     linkedin_link = models.CharField(null=True, max_length=255)
     position = models.CharField(null=True, max_length=255)
-    personal_image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True, blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+',
-    )
+    image_filename = models.CharField(null=True, max_length=255)
+    # personal_image = models.ForeignKey(
+    #     'wagtailimages.Image',
+    #     null=True, blank=True,
+    #     on_delete=models.SET_NULL,
+    #     related_name='+',
+    # )
     full_bio = MarkdownField(
         verbose_name='Your personal bio', blank=True,
     )
-    excerpt = MarkdownField(
-        verbose_name='excerpt', blank=True,
-    )
-    categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
-    tags = ClusterTaggableManager(through='blog.BlogPageTag', blank=True)
 
     content_panels = Page.content_panels + [
-
         FieldPanel('name'),
+        FieldPanel('image_filename'),
         FieldPanel('position'),
         FieldPanel('permalink'),
         FieldPanel('linkedin_link'),
-        ImageChooserPanel('personal_image'),
+        # ImageChooserPanel('personal_image'),
         MarkdownPanel("full_bio"),
-        # MarkdownPanel("excerpt"),
-        # FieldPanel('categories', widget=forms.CheckboxSelectMultiple),
-        # FieldPanel('tags'),
     ]
+
+    settings_panels = Page.settings_panels + [
+        FieldPanel('date'),
+    ]
+
     @property
     def blog_page(self):
         return self.get_parent().specific
