@@ -1,7 +1,5 @@
 ## Introduction
 
-[![Build Status](https://travis-ci.org/hsinlei/tpl-wagtail?branch=master)]
-
 ## Project Detail
 
 * Python 3
