@@ -64,7 +64,7 @@
         {% paginate 5 posts %}
         {% for teammate in posts %}
           <div class="team__member col-6 col-md-4 col-lg-3 u__vspacing-b">
-              <a href="" class="team__link ">
+		  <a href="{% pageurl teammate %}" class="team__link ">
                 <div class="team__photo ">
 
                     <img src="{% static 'img/team/'|add:teammate.image_filename %}"

@@ -1,4 +1,3 @@
-{% extends "blog/base.html" %}
 {% load static wagtailcore_tags wagtailimages_tags blogapp_tags wagtailmd%}
 
 {% block title %}{{ self.title }} | {{ blog_page.title }}{% endblock title %}
@@ -7,42 +6,148 @@
 {% block canonical %}{% canonical_url self%}{% endblock canonical %}
 
 {% block content %}
-    {% if post.header_image %}
-        {% image post.header_image original as header_image %}
-        <img src="{{ header_image.url }}" class="img-fluid rounded" ></img>
-        <hr>
-    {% endif %}
-    <h1>{{ post.title }}</h1>
 
-    <p>
-        <i class="far fa-clock"></i> {{post.date}} &nbsp;
-        <i class="far fa-user"></i> {{post.owner}} &nbsp;
-        {% post_categories %}
-    </p>
-    <hr>
+<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <link rel="dns-prefetch" href="//use.typekit.net">
+    <link rel="dns-prefetch" href="//cloud.typography.com">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="dns-prefetch" href="//code.jquery.com">
+    <link rel="dns-prefetch" href="//stackpath.bootstrapcdn.com">
+    <link rel="preconnect" href="//brown.us20.list-manage.com">
 
-    {{ post.body|markdown|safe }}
-    <hr>
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-site-verification" content="wkcAVWy8ClxzqSm5y4O1zgeSVSi3QBaFD69VQP5YNvQ">
 
-    {% post_tags_list %}
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="The Policy Lab">
+    <meta property="og:url" content="http://localhost:4060/">
+    <meta property="og:image" content="{% static 'img/share-image.jpg' %}">
+    <meta property="og:site_name" content="The Policy Lab">
+    <meta property="og:description"
+          content="We're a new lab at the center of Rhode Island’s infrastructure for evidence-based policymaking. Let's learn together.">
 
-    {% show_comments %}
+    <title>The Policy Lab</title>
+    <meta name="description"
+          content="We're a new lab at the center of Rhode Island’s infrastructure for evidence-based policymaking. Let's learn together.">
 
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        extensions: ["tex2jax.js"],
-        jax: ["input/TeX", "output/HTML-CSS"],
-        tex2jax: {
-          inlineMath: [['$','$']],
-          displayMath: [['$$','$$']] ,
-          processEscapes: true
-        },
-        "HTML-CSS": { availableFonts: ["TeX"] }
-      });
+    <link rel="stylesheet" type="text/css" href="https://use.typekit.net/wag1nll.css">
+    <link rel="stylesheet" type="text/css" href="https://cloud.typography.com/7022116/7515612/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134641342-1"></script>
+    <script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-134641342-1');
+
     </script>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon.png' %}">
 
-    <script type="text/javascript"
-       src="//cdn.mathjax.org/mathjax/latest/MathJax.js">
-    </script>
 
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'favicons/site.webmanifest' %}">
+    <link rel="mask-icon" href="{% static 'favicons/safari-pinned-tab.svg' %}" color="#007ea8">
+    <meta name="msapplication-TileColor" content="#007ea8">
+    <meta name="theme-color" content="#007ea8">
+
+</head>
+   <section id="content" class="layout__main team">
+  <div class="team__member__profile">
+    <header class="team__member__header u__spacing u__vspacing s__light-splatter s__lil-splatter">
+      <div class="row u__container">
+        <div class="col-sm-6 team__member__name">
+          <h1 class="team__member__title display-4">{{ post.name }}</h1>
+          <p class="team__member__position h3"><b>{{ post.position }}</b></p>
+
+          <div class="team__member__meta">
+          {% if post.website %}
+            <a class="team__member__social" href="{{ page.website }}" target="_blank" title="Visit {{ page.title }}’s personal website in a new window">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path d="M32 31c6.6 0 12-5.4 12-12S38.6 7 32 7s-12 5.4-12 12 5.4 12 12 12zm-5.5-15c0-3 2.5-5.5 5.5-5.5s5.5 2.5 5.5 5.5c0 2.2-1.3 4-3.1 4.9 2.2.8 4.1 2.5 4.1 4.8 0 2.1-3.4 3.4-6.5 3.4s-6.5-1.3-6.5-3.4c0-2.3 1.9-4 4.1-4.8-1.8-.9-3.1-2.7-3.1-4.9z"/><path d="M32 0C14.3 0 0 14.3 0 32s14.3 32 32 32 32-14.3 32-32S49.7 0 32 0zm0 5c7.7 0 14 6.3 14 14s-6.3 14-14 14-14-6.3-14-14S24.3 5 32 5zM16 37h32v4H16v-4zm29 18H19v-4h26v4zm5-7H14v-4h36v4z"/></svg>
+              <span class="sr-only">Personal website</span>
+            </a>
+          {% endif %}
+          {% if post.linkedin %}
+            <a class="team__member__social" href="{{ page.linkedin }}" target="_blank" title="Visit {{ page.title }}’s LinkedIn profile in a new window">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"/></svg>
+              <span class="sr-only">LinkedIn profile</span>
+            </a>
+          {% endif %}
+          {% if post.twitter %}
+            <a class="team__member__social" href="{{ page.twitter }}" target="_blank" title="Visit {{ page.title }}’s Twitter profile in a new window">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.066 9.645c.183 4.04-2.83 8.544-8.164 8.544-1.622 0-3.131-.476-4.402-1.291 1.524.18 3.045-.244 4.252-1.189-1.256-.023-2.317-.854-2.684-1.995.451.086.895.061 1.298-.049-1.381-.278-2.335-1.522-2.304-2.853.388.215.83.344 1.301.359-1.279-.855-1.641-2.544-.889-3.835 1.416 1.738 3.533 2.881 5.92 3.001-.419-1.796.944-3.527 2.799-3.527.825 0 1.572.349 2.096.907.654-.128 1.27-.368 1.824-.697-.215.671-.67 1.233-1.263 1.589.581-.07 1.135-.224 1.649-.453-.384.578-.87 1.084-1.433 1.489z"/></svg>
+              <span class="sr-only">Twitter profile</span>
+            </a>
+          {% endif %}
+          {% if post.github %}
+            <a class="team__member__social" href="{{ page.github }}" target="_blank" title="Visit {{ page.title }}’s GitHub profile in a new window">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+              <span class="sr-only">Github profile</span>
+            </a>
+          {% endif %}
+          </div>
+
+        </div>
+        <div class="col-sm-6 team__member__headshotvimg--rwd team__member__img">
+             {% image post.personal_image max-320x320%}
+        </div>
+      </div>
+    </header>
+
+    <article class="container u__container u__vspacing team__member__bio">
+      <div class="row">
+        <div class="col-sm-9 col-lg-8">
+
+          {{ post.full_bio }}
+
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <footer class="u__vspacing s__primary">
+    <div class="u__container">
+      <div class="u__spacing">
+        <h2 class="h1 text-center">Our Team</h2>
+      </div>
+      <div class="container u__spacing team py-0">
+        <div class="row justify-content-center">
+          {% for teammate in site.team %}
+            {% if page.title != teammate.title %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </footer>
+       <aside class="u__vspacing s__primary s__primary-clean">
+    <div class="u__container u__spacing connect">
+      <div class="row">
+        <div class="col-md-3 col-lg-4">
+          <h2 class="h1">Get Updates</h2>
+        </div>
+        <div class="col-md-9 col-lg-8">
+          <p class="lead">Sign up to get updates on projects, events, and new episodes of our podcast, <a href="https://thirtythousandleagues.com/">30,000 Leagues</a></p>
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+
+
+</section>
+
+
+</html>
 {% endblock %}
+
+
+
