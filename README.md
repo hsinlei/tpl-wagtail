@@ -15,5 +15,7 @@ pip install -r requirements.txt
 
 ./manage.py runserver
 # http://127.0.0.1:8000/blog
-# username: admin  password: admin
+
+./manage.py createsuperuser
+# create username and password
 ```
