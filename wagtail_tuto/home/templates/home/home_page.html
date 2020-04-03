@@ -323,6 +323,19 @@
             <div class="row justify-content-center">
             </div>
             <div class="text-center">
+                    {% for teammate in social_media_setting %}
+                    <div class="team__member col-6 col-md-4 col-lg-3 u__vspacing-b">
+                        <a href="" class="team__link ">
+                            <div class="team__photo ">
+                                {% image teammate.personal_image max-320x320%}
+                            </div>
+                            <p>
+                                <span class="team__name h5">{{ teammate.name }}</span>{% comment %}
+                                <span class="team__position">{{ teammate.position }}</span>{% endcomment %}
+                            </p>
+                        </a>
+                    </div>
+                    {% endfor %}		    
               <a href="/team" class="btn btn-lg btn-primary">View All</a>
             </div>
           </div>

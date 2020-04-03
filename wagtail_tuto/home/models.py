@@ -9,7 +9,7 @@ from wagtail.core.models import Page
 from wagtail.images.blocks import ImageChooserBlock
 
 from home.blocks import RowBlock
-
+from blog.models import PostPage
 
 class HomePage(Page):
     pass
