@@ -106,28 +106,37 @@ class BlogPage(RoutablePageMixin, Page):
 class PostPage(Page):
     name = models.CharField(null=True, max_length=255)
     date = models.DateTimeField(verbose_name="Post date", default=datetime.datetime.today)
-    permalink = models.URLField("Full Link", blank=True)
-    linkedin_link = models.CharField(null=True, max_length=255)
+    website =  models.URLField("Personal Website", blank=True)
+    linkedin = models.URLField("Linkedin", blank=True)
+    twitter_link = models.URLField("Twitter Link", blank=True)
+    github_link = models.URLField("Github Link", blank=True)
     position = models.CharField(null=True, max_length=255)
-    image_filename = models.CharField(null=True, max_length=255)
-    # personal_image = models.ForeignKey(
-    #     'wagtailimages.Image',
-    #     null=True, blank=True,
-    #     on_delete=models.SET_NULL,
-    #     related_name='+',
-    # )
+    personal_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True, blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+    )
     full_bio = MarkdownField(
         verbose_name='Your personal bio', blank=True,
     )
+    excerpt = MarkdownField(
+        verbose_name='excerpt', blank=True,
+    )
+    categories = ParentalManyToManyField('blog.BlogCategory', blank=True)
+    tags = ClusterTaggableManager(through='blog.BlogPageTag', blank=True)
 
     content_panels = Page.content_panels + [
+
         FieldPanel('name'),
-        FieldPanel('image_filename'),
         FieldPanel('position'),
-        FieldPanel('permalink'),
-        FieldPanel('linkedin_link'),
-        # ImageChooserPanel('personal_image'),
+        FieldPanel('website'),
+        FieldPanel('linkedin'),
+        FieldPanel('twitter_link'),
+        FieldPanel('github_link'),
+        ImageChooserPanel('personal_image'),
         MarkdownPanel("full_bio"),
+        # FieldPanel('tags'),
     ]
 
     settings_panels = Page.settings_panels + [
@@ -226,3 +235,4 @@ class FormPage(AbstractEmailForm):
     @property
     def blog_page(self):
         return self.get_parent().specific
+
