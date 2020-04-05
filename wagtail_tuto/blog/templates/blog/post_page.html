@@ -96,9 +96,8 @@
     <article class="container u__container u__vspacing team__member__bio">
       <div class="row">
         <div class="col-sm-9 col-lg-8">
-
-          {{ post.full_bio }}
-
+	  {% load wagtailmarkdown %}
+	  {{ post.full_bio|markdown }}
         </div>
       </div>
     </article>
