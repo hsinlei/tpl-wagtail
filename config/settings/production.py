@@ -19,9 +19,9 @@ ADMINS = (
 )
 
 
-ALLOWED_HOSTS = ['54.234.209.28']
+ALLOWED_HOSTS = ['plabextcmscit.services.brown.edu', 'localhost']
 
-STATIC_URL = 'http://54.234.209.28:8888/'
+#STATIC_URL = '/static/'
 
 try:
     from .local import *
